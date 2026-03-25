@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./authentication.css";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "./firebase";
 
@@ -13,36 +14,42 @@ export default function Authentication() {
         //reset error
         setError("");
 
+        if (!email || !password) {
+            setError("Please enter both email and password")
+            return;
+        }
+
         try {
             await signInWithEmailAndPassword(auth, email, password);
             alert("Login succesful!");
             //transefer to dashboard page when logged in
             window.location.href = "/dashboard.html";
         } catch (err) {
-            setError(err.message);
+            setError("Invalid Email or Password");
         }
     };
+
     return (
-        <div>
+        <div className="container">
             <h2>Login</h2>
 
             <input
                 type="email"
-                placeholder="Email"
+                placeholder="Enter Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
 
             <input
                 type="password"
-                placeholder="Password"
+                placeholder="Enter Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
 
             <button onClick={handleLogin}>Login</button>
 
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && <p className="error">{error}</p>}
         </div>
     );
 }
