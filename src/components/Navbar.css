@@ -16,3 +16,9 @@
     display: flex;
     gap: 10px;
 }
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+}
