@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { app } from "../firebase/firebaseConfig";
+import app from "../firebase/firebaseConfig";
 
 const auth = getAuth(app);
 
