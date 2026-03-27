@@ -1,8 +1,19 @@
 import "./HomePage.css";
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function HomePage() {
-    const isLoggedIn = false;
-    const userName = "Tim";
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, setUser);
+        return () => unsubscribe();
+    }, []);
+
+    const isLoggedIn = !!user;
+    const userName = user ? user.displayName || user.email : "";
+
 
     return (
     <>
