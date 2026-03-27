@@ -16,15 +16,20 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-import { db } from "../firebaseConfig";
+import { db, auth } from "../firebaseConfig";
 import { COLLECTIONS, createEventDoc } from "../schema";
 
 const eventsRef = () => collection(db, COLLECTIONS.EVENTS);
 const eventRef = (eventId) => doc(db, COLLECTIONS.EVENTS, eventId);
 
 // Create a new event
-export async function createEvent(ownerId, data) {
-  const docData = createEventDoc(ownerId, data);
+export async function createEvent(data) {
+  const user = auth.currentUser;
+  if (!user) throw new Error("Not signed in");
+  const docData = createEventDoc(user.uid, {
+      ...data,
+      ownerId: user.uid,
+  });
   const ref = await addDoc(eventsRef(), docData);
   return ref.id;
 }
@@ -38,9 +43,17 @@ export async function getEventById(eventId) {
 
 // Get all events for a specific owner (newest first)
 export async function getEventsByOwner(ownerId) {
-  const q = query(eventsRef(), where("ownerId", "==", ownerId), orderBy("date", "desc"));
+  const q = query(eventsRef(), where("ownerId", "==", ownerId));
   const snap = await getDocs(q);
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  let events = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+  events.sort((a, b) => {
+    const dateA = a.date ? new Date(a.date.seconds * 1000) : new Date(0);
+    const dateB = b.date ? new Date(b.date.seconds * 1000) : new Date(0);
+    return dateB - dateA;
+  });
+
+  return events;
 }
 
 // Get all events (optionally filter by status)

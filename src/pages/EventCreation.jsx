@@ -29,10 +29,10 @@ export default function EventCreation() {
     }
 
     try {
-      const eventId = await createEvent(user.uid, {
+      const eventId = await createEvent({
         title,
         description,
-        date: new Date(date),
+        date: new Date(date)
       });
 
       navigate(`/events/${eventId}`);

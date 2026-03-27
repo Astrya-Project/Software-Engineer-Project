@@ -17,9 +17,14 @@ export default function Events() {
         return;
       }
 
-      const data = await getEventsByOwner(user.uid);
-      setEvents(data);
-      setLoading(false);
+      try {
+        const data = await getEventsByOwner(user.uid);
+        setEvents(data);
+      } catch (err) {
+        console.error("Failed to fetch events:", err);
+      } finally {
+        setLoading(false);
+      }
     });
 
     return () => unsubscribe();
@@ -38,15 +43,25 @@ export default function Events() {
       ) : events.length === 0 ? (
         <p>No events yet.</p>
       ) : (
-        events.map((event) => (
+        events.map((event) => {
+          let eventDate = "No date";
+
+          if (event.date) {
+            if (event.date.seconds) {
+              eventDate = new Date(event.date.seconds * 1000).toLocaleDateString();
+            } else {
+              eventDate = new Date(event.date).toLocaleDateString();
+            }
+          }
+
+          return (
             <div key={event.id} className="event-item">
-            <strong>{event.title || "Untitled Event"}</strong>
-            <br />
-            {event.date
-              ? new Date(event.date.seconds * 1000).toLocaleDateString()
-              : "No date"}
-          </div>
-        ))
+              <strong>{event.title || "Untitled Event"}</strong>
+              <br />
+              {eventDate}
+            </div>
+          );
+        })
       )}
     </div>
   );

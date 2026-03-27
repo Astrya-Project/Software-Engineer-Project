@@ -1,6 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
+import { COLLECTIONS } from "../firebase/schema";
 import "./Navbar.css";
 
 function Navbar() {
@@ -11,9 +14,23 @@ function Navbar() {
   useEffect(() => {
     const auth = getAuth();
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsLoggedIn(!!user);
-      setUserName(user ? user.displayName || user.email : "");
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+
+        const userDocRef = doc(db, COLLECTIONS.USERS, user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+
+        if (userDocSnap.exists()) {
+          const data = userDocSnap.data();
+          setUserName(data.firstName || data.username || user.email);
+        } else {
+          setUserName(user.email);
+        }
+      } else {
+        setIsLoggedIn(false);
+        setUserName("");
+      }
     });
 
     return () => unsubscribe();
@@ -30,7 +47,7 @@ function Navbar() {
       <Link to="/" className="logo">
         <h1>Astrya's Events</h1>
       </Link>
-      
+
       <div className="nav-links">
         {isLoggedIn ? (
           <>
