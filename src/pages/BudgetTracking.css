@@ -1,5 +1,5 @@
 .container {
-    width: 300px;
+    width: 400px;
     margin: 100px auto;
     text-align: center;
     font-family: Arial;
@@ -9,22 +9,16 @@ input {
     display: block;
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
 button {
-    padding: 10px;
     width: 100%;
-    background-color: #4CAF50;
-    color: white;
+    padding: 10px;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049
-}
-
-.error {
-    color: red;
+    opacity: 0.9;
 }

@@ -47,16 +47,6 @@
             ]
         },
         {
-            "collectionGroup": "guests",
-            "queryScope": "COLLECTION_GROUP",
-            "fields": [
-                {
-                    "fieldPath": "userId",
-                    "order": "ASCENDING"
-                }
-            ]
-        },
-        {
             "collectionGroup": "budgetItems",
             "queryScope": "COLLECTION_GROUP",
             "fields": [

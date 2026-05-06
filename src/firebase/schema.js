@@ -68,6 +68,7 @@ export const VENDOR_CATEGORIES = {
 export function createUserDoc(overrides = {}) {
   return {
     // Basic info
+    username: "",
     firstName: "",
     lastName: "",
     email: "",

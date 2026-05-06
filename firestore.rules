@@ -1,7 +1,7 @@
 rules_version = '2';
 
 service cloud.firestore {
-    match / databases / { database } / documents {
+    match/databases/{database}/documents {
 
         // Helper functions
 
@@ -12,7 +12,7 @@ service cloud.firestore {
 
         // Returns the caller's role stored in their user document
         function getRole() {
-            return get(/databases/$(database) / documents / users / $(request.auth.uid)).data.role;
+            return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
         }
 
         // Role checks
@@ -23,12 +23,12 @@ service cloud.firestore {
 
         // True if the caller owns this event (their uid matches the ownerId field)
         function ownsEvent(eventId) {
-            return get(/databases/$(database) / documents / events / $(eventId)).data.ownerId == request.auth.uid;
+            return get(/databases/$(database)/documents/events/$(eventId)).data.ownerId == request.auth.uid;
         }
 
         // /users/{userId}
 
-        match / users / { userId } {
+        match/users/{userId} {
       // Anyone can create their own user doc on signup
       allow create: if isSignedIn() && request.auth.uid == userId;
 
@@ -47,7 +47,7 @@ service cloud.firestore {
 
         // /events/{eventId}
 
-        match / events / { eventId } {
+        match/events/{eventId} {
       // Admin and planner can read all events; clients read only their own
       allow read: if isAdmin() || isPlanner() ||
                 (isClient() && resource.data.ownerId == request.auth.uid);
@@ -63,7 +63,7 @@ service cloud.firestore {
       allow delete: if isAdmin() || isPlanner();
 
             // ── /events/{eventId}/guests/{guestId} ──────
-            match / guests / { guestId } {
+            match/guests/{guestId} {
         // Event owner, planner, admin can read/write guests
         allow read, write: if isAdmin() || isPlanner() || ownsEvent(eventId);
 
@@ -77,12 +77,12 @@ service cloud.firestore {
             }
 
             // ── /events/{eventId}/budgetItems/{itemId} ──
-            match / budgetItems / { itemId } {
+            match/budgetItems/{itemId} {
         allow read, write: if isAdmin() || isPlanner() || ownsEvent(eventId);
             }
 
             // ── /events/{eventId}/messages/{messageId} ──
-            match / messages / { messageId } {
+            match/messages/{messageId} {
         // Event owner, planner, admin can read all messages
         allow read: if isAdmin() || isPlanner() || ownsEvent(eventId);
         // Any participant in the event may write a message
@@ -95,7 +95,7 @@ service cloud.firestore {
 
         // /vendors/{vendorId}
 
-        match / vendors / { vendorId } {
+        match/vendors/{vendorId} {
       // All authenticated users can read the vendor directory
       allow read: if isSignedIn();
 
@@ -106,7 +106,7 @@ service cloud.firestore {
         // /rsvpTokens/{token}
 
         // Lookup table so a guest can find their event via a unique invite link
-        match / rsvpTokens / { token } {
+        match/rsvpTokens/{token} {
       // Anyone (even unauthenticated) can read a token to bootstrap the RSVP flow
       allow read: if true;
       // Only the system (admin/planner) can create tokens
@@ -116,7 +116,7 @@ service cloud.firestore {
 
         // /systemConfig/{docId}
 
-        match / systemConfig / { docId } {
+        match/systemConfig/{docId} {
       allow read: if isSignedIn();
       allow write: if isAdmin();
         }
