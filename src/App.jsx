@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AccountPage from './pages/AccountPage';
 import Navbar from './components/Navbar';
 import SecurityVerification from './components/SecurityVerification';
 import Login from './pages/Login';
@@ -22,6 +23,7 @@ function App() {
             <Route path="events" element={<SecurityVerification> <Events /></SecurityVerification>} />
             <Route path="event-creation" element={<SecurityVerification> <EventCreation /></SecurityVerification>} />
             <Route path="budget" element={<SecurityVerification> <BudgetTracking /></SecurityVerification>} />
+            <Route path="account" element={<SecurityVerification> <AccountPage /></SecurityVerification>} />
             <Route path="*" element={<HomePage />} />
           </Routes>
       </div>

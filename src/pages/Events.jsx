@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebaseConfig";
-import { getEventsByOwner } from "../firebase/services/eventService";
+import { getEventsByOwner, deleteEvent } from "../firebase/services/eventService";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./Events.css";
@@ -9,6 +9,18 @@ export default function Events() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const handleDelete = async (eventId) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this event?");
+  if (!confirmDelete) return;
+
+    try {
+      await deleteEvent(eventId);
+      setEvents((prev) => prev.filter((e) => e.id !== eventId));
+    } catch (err) {
+      console.error("Failed to delete event:", err);
+    }
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -56,9 +68,18 @@ export default function Events() {
 
           return (
             <div key={event.id} className="event-item">
-              <strong>{event.title || "Untitled Event"}</strong>
-              <br />
-              {eventDate}
+              <div className="event-info">
+                <strong>{event.title || "Untitled Event"}</strong>
+                <br />
+                {eventDate}
+              </div>
+
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(event.id)}
+              >
+                Delete
+              </button>
             </div>
           );
         })

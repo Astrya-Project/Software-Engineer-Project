@@ -120,6 +120,6 @@ export async function deactivateUser(uid) {
  * @param {string} uid
  * @returns {Promise<void>}
  */
-export async function deleteUser(uid) {
+export async function deleteUserDoc(uid) {
   await deleteDoc(userRef(uid));
 }
