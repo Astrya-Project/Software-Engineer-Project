@@ -81,16 +81,21 @@ export default function Events() {
                   Budget
                 </button>
 
+                <button onClick={() => navigate(`/event-creation/${event.id}`)}>
+                  Edit
+                </button>
+
               <button
                 className="delete-btn"
                 onClick={() => handleDelete(event.id)}
               >
                 Delete
               </button>
+              </div>
             </div>
             );
-      })
-      )}
-    </div>
+          })
+        )}
+        </div>
   );
 }

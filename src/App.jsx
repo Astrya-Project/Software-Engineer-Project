@@ -22,6 +22,7 @@ function App() {
             <Route path="signup" element={<SignUp />} />
             <Route path="events" element={<SecurityVerification> <Events /></SecurityVerification>} />
             <Route path="event-creation" element={<SecurityVerification> <EventCreation /></SecurityVerification>} />
+            <Route path="event-creation/:eventId" element={<SecurityVerification> <EventCreation /></SecurityVerification>} />
             <Route path="budget/:eventID" element={<SecurityVerification> <BudgetTracking /></SecurityVerification>} />
             <Route path="account" element={<SecurityVerification> <AccountPage /></SecurityVerification>} />
             <Route path="*" element={<HomePage />} />
