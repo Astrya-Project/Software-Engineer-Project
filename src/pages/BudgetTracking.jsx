@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./BudgetTracking.css";
 
 import {
@@ -10,7 +11,7 @@ import {
 } from "../firebase/services/budgetService";
 
 export default function BudgetTracking() {
-  const eventId = "demo-event";
+  const { eventId } = useParams();
   const [totalBudget, setTotalBudget] = useState(1000);
   const [items, setItems] = useState([]);
   const [name, setName] = useState("");

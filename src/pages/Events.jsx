@@ -74,6 +74,13 @@ export default function Events() {
                 {eventDate}
               </div>
 
+              <div className="event-buttons">
+                <button
+                onClick={() => navigate('/budget/$event.id}')}
+                >
+                  Budget
+                </button>
+
               <button
                 className="delete-btn"
                 onClick={() => handleDelete(event.id)}
