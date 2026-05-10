@@ -22,3 +22,25 @@ button {
 button:hover {
     opacity: 0.9;
 }
+
+.expense-list {
+    margin-top: 20px;
+}
+
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.expense-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.summary {
+    margin-top: 20px;
+}
