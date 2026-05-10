@@ -88,5 +88,9 @@ export default function Events() {
                 Delete
               </button>
             </div>
+            );
+      })
+      )}
     </div>
   );
+}
