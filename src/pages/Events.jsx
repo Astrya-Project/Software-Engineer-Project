@@ -76,7 +76,7 @@ export default function Events() {
 
               <div className="event-buttons">
                 <button
-                onClick={() => navigate('/budget/$event.id}')}
+                onClick={() => navigate(`/budget/${event.id}`)}
                 >
                   Budget
                 </button>
@@ -88,9 +88,5 @@ export default function Events() {
                 Delete
               </button>
             </div>
-          );
-        })
-      )}
     </div>
   );
-}
