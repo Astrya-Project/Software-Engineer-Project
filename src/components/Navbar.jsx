@@ -12,6 +12,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import { COLLECTIONS } from "../firebase/schema";
 
+import logo from "../assets/Astryas.png";
+
 import "./Navbar.css";
 
 function Navbar() {
@@ -86,8 +88,12 @@ function Navbar() {
   return (
     <nav className="navbar">
       {/* LOGO */}
-      <Link to="/" className="logo">
-        Astrya's Events
+      <Link to="/" className="logo-link">
+        <img
+          src={logo}
+          alt="Astrya's Events"
+          className="logo"
+        />
       </Link>
 
       {/* NAVIGATION */}

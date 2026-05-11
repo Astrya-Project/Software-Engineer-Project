@@ -110,3 +110,15 @@
     display: none;
   }
 }
+
+.logo {
+  height: 75px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
