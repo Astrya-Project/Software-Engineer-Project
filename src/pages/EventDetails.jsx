@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getEventById } from "../firebase/services/eventService";
+import GuestListManager from "./Guest List Management";
 import "./EventDetails.css";
 
 export default function EventDetails() {
@@ -97,12 +98,10 @@ export default function EventDetails() {
           >
             View Budget
           </button>
-          <button 
-            className="btn-guests"
-            onClick={() => navigate(`/guests/${eventId}`)}
-          >
-            Manage Guests
-          </button>
+        </div>
+
+        <div className="guest-list-section">
+          <GuestListManager eventId={eventId} />
         </div>
       </div>
     </div>
