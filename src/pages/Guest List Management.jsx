@@ -3,7 +3,7 @@ import {
   addDoc, collection, deleteDoc, doc, onSnapshot,
   query, updateDoc, where
 } from "firebase/firestore";
-import { db } from "../firebase"; // adjust import based on your project
+import { db } from "../firebase";
 
 type RSVP = "pending" | "yes" | "no";
 
