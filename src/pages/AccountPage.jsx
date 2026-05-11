@@ -17,7 +17,7 @@ import {
   getUserById,
   updateUser,
   deleteUserDoc,
-} from "../../firebase/services/userService";
+} from "../firebase/services/userService";
 
 import "./accountPage.css";
 
