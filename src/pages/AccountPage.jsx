@@ -11,7 +11,7 @@ import {
   deleteUser as deleteAuthUser,
 } from "firebase/auth";
 
-import { auth } from "../../firebase/firebaseConfig";
+import { auth } from "../firebase/firebaseConfig";
 
 import {
   getUserById,
