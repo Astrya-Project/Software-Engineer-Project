@@ -106,3 +106,26 @@
   font-size: 16px;
   margin-bottom: 20px;
 }
+
+/* Guest List Section */
+.guest-list-section {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px solid #e0e0e0;
+}
+
+.guest-list-section .guest-list-container {
+  max-width: none;
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.guest-list-section h2 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+}
