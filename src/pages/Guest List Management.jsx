@@ -8,7 +8,7 @@ import {
   query,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebase/firebaseConfig";
 import "./Guest List Management.css";
 
 export default function GuestListManager({ eventId }) {
