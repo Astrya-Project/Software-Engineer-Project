@@ -25,7 +25,7 @@ function App() {
             <Route path="event-details/:eventId" element={<SecurityVerification> <EventDetails /></SecurityVerification>} />
             <Route path="event-creation" element={<SecurityVerification> <EventCreation /></SecurityVerification>} />
             <Route path="event-creation/:eventId" element={<SecurityVerification> <EventCreation /></SecurityVerification>} />
-            <Route path="budget/:eventID" element={<SecurityVerification> <BudgetTracking /></SecurityVerification>} />
+            <Route path="budget/:eventId" element={<SecurityVerification> <BudgetTracking /></SecurityVerification>} />
             <Route path="account" element={<SecurityVerification> <AccountPage /></SecurityVerification>} />
             <Route path="*" element={<HomePage />} />
           </Routes>
