@@ -68,7 +68,10 @@ export default function Events() {
 
           return (
             <div key={event.id} className="event-item">
-              <div className="event-info">
+              <div 
+                className="event-info" 
+                onClick={() => navigate(`/event-details/${event.id}`)}
+              >
                 <strong>{event.title || "Untitled Event"}</strong>
                 <br />
                 {eventDate}
